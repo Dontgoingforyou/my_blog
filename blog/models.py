@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models import CASCADE
 from django.utils import timezone
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='Категория')
 
@@ -23,6 +24,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Article(models.Model):
     author = models.ForeignKey(User, on_delete=CASCADE, related_name='articles', verbose_name='Автор')
@@ -53,4 +55,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Комментарий от {self.author.username} к {self.article.title}"
-

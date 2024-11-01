@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from rest_framework import viewsets
 from .models import Article, Category, Comment, Tag
 from .serializers import ArticleSerializer, CategorySerializer, CommentSerializer, TagSerializer
@@ -54,3 +55,8 @@ class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+
+
+def article_list(request):
+    articles = Article.objects.all().order_by('-created_at')
+    return render(request, 'blog/base.html', {'articles': articles})
